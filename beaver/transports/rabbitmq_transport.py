@@ -87,6 +87,7 @@ class RabbitmqTransport(BaseTransport):
                     raise TransportException(e.strerror)
                 except AttributeError:
                     raise TransportException('Unspecified exception encountered')  # TRAP ALL THE THINGS!
+        self.reset_message_number()
 
     def interrupt(self):
         if self._connection:
