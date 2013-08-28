@@ -40,21 +40,24 @@ class RabbitmqTransport(BaseTransport):
         self._channel = self._connection.channel()
 
         # Declare RabbitMQ queue and bindings
-        self._channel.queue_declare(
-            queue=self._rabbitmq_config['queue'],
-            durable=self._rabbitmq_config['queue_durable'],
-            arguments={'x-ha-policy': 'all'} if self._rabbitmq_config['ha_queue'] else {}
-        )
-        self._channel.exchange_declare(
-            exchange=self._rabbitmq_config['exchange'],
-            exchange_type=self._rabbitmq_config['exchange_type'],
-            durable=self._rabbitmq_config['exchange_durable']
-        )
-        self._channel.queue_bind(
-            exchange=self._rabbitmq_config['exchange'],
-            queue=self._rabbitmq_config['queue'],
-            routing_key=self._rabbitmq_config['key']
-        )
+        if(self._rabbitmq_config['declare_queue'] == '1'):
+            self._channel.queue_declare(
+                queue=self._rabbitmq_config['queue'],
+                durable=self._rabbitmq_config['queue_durable'],
+                arguments={'x-ha-policy': 'all'} if self._rabbitmq_config['ha_queue'] else {}
+            )
+        if(self._rabbitmq_config['declare_exchange'] == '1'):
+            self._channel.exchange_declare(
+                exchange=self._rabbitmq_config['exchange'],
+                exchange_type=self._rabbitmq_config['exchange_type'],
+                durable=self._rabbitmq_config['exchange_durable']
+            )
+        if(self._rabbitmq_config['bind_queue'] == '1'):
+            self._channel.queue_bind(
+                exchange=self._rabbitmq_config['exchange'],
+                queue=self._rabbitmq_config['queue'],
+                routing_key=self._rabbitmq_config['key']
+            )
 
     def callback(self, filename, lines, **kwargs):
         timestamp = self.get_timestamp(**kwargs)
