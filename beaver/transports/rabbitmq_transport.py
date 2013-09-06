@@ -12,8 +12,9 @@ class RabbitmqTransport(BaseTransport):
 
         self._rabbitmq_config = {}
         config_to_store = [
-            'key', 'exchange', 'username', 'password', 'host', 'port', 'vhost', 
-            'queue', 'queue_durable', 'ha_queue', 'exchange_type', 'exchange_durable'
+            'key', 'exchange', 'username', 'password', 'host', 'port', 'vhost',
+            'queue', 'queue_durable', 'ha_queue', 'exchange_type', 'exchange_durable',
+            'declare_queue', 'declare_exchange', 'bind_queue'
         ]
 
         for key in config_to_store:
