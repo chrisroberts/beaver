@@ -65,6 +65,7 @@ class BeaverConfig():
             'rabbitmq_declare_queue': os.environ.get('RABBITMQ_DECLARE_QUEUE', '1'),
             'rabbitmq_declare_exchange': os.environ.get('RABBITMQ_DECLARE_EXCHANGE', '1'),
             'rabbitmq_bind_queue': os.environ.get('RABBITMQ_BIND_QUEUE', '1'),
+            'rabbitmq_ssl': os.environ.get('RABBITMQ_SSL', '0'),
             'redis_url': os.environ.get('REDIS_URL', 'redis://localhost:6379/0'),
             'redis_namespace': os.environ.get('REDIS_NAMESPACE', 'logstash:beaver'),
             'redis_password': '',
