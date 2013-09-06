@@ -91,8 +91,8 @@ class BaseTransport(object):
         })
 
     def increment_message_number(self):
-        self._message_number++
-        
+        self._message_number = self._message_number + 1
+
         return self._message_number
 
     def reset_message_number(self):
